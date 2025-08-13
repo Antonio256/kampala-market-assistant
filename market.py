@@ -54,11 +54,15 @@ produce_items = {
     "onions": {
         "price": 2200,
         "stock": 20
+    },
+    "melons": {
+        "price": 2200,
+        "stock": 0
     }
     
 }
 
-customer_list = ["mango", "orange", "banana", "apple", "onions"]
+customer_list = ["mango", "orange", "banana", "apple", "onions", "mellons"]
 
 
 def calculate_bill(produce_items, customer_list):
@@ -66,11 +70,13 @@ def calculate_bill(produce_items, customer_list):
     
     for item in customer_list:
         if item in produce_items:
-            print(f"Adding {item} to the cart")
+            if produce_items[item]["stock"] > 0: #Checking for stock availability
+                print(f"Adding {item} to the cart")
         
-            total_cost += produce_items[item]["price"]
+                total_cost += produce_items[item]["price"]
+                produce_items[item]["stock"] -= 1 #reduce stock
         else:
-            print(f"We are out of stock for {item}")
+            print(f"Sorry. {item} is currently out of stock")
     return total_cost
 
 fina_bill = calculate_bill(produce_items, customer_list)
